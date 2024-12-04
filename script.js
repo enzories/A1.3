@@ -1,7 +1,7 @@
 const matricula = "432126";
 const baseApiUrl = "http://localhost/meu_site/api.php";
 
-// Evento para gerar QR Code e salvar log
+
 document.getElementById('generateBtn').addEventListener('click', async function () {
     const textInput = document.getElementById('textInput').value;
     const size = document.getElementById('sizeSelect').value;
@@ -11,11 +11,11 @@ document.getElementById('generateBtn').addEventListener('click', async function 
         return;
     }
 
-    // Gera o QR Code
+    
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(textInput)}&size=${size}`;
     document.getElementById('qrCode').innerHTML = `<img src="${qrUrl}" alt="QR Code">`;
 
-    // Salva o log no banco de dados
+    
     const log = {
         metodo: "QR Code",
         resultado: `Gerado com sucesso para "${textInput}"`,
@@ -42,10 +42,10 @@ document.getElementById('generateBtn').addEventListener('click', async function 
     }
 });
 
-// Função para buscar e exibir logs no modal
+
 async function showLogs() {
     const logsList = document.getElementById('logsList');
-    logsList.innerHTML = ''; // Limpa a lista antes de renderizar os logs
+    logsList.innerHTML = ''; 
 
     try {
         const response = await fetch(baseApiUrl);
@@ -64,7 +64,7 @@ async function showLogs() {
             logsList.innerHTML = `<p>Nenhum log encontrado.</p>`;
         }
 
-        // Exibe o modal de logs
+    
         document.getElementById('logModal').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
     } catch (error) {
@@ -72,7 +72,7 @@ async function showLogs() {
     }
 }
 
-// Função para deletar um log
+
 async function deleteLog(idLog) {
     try {
         const deleteUrl = `${baseApiUrl}?id=${idLog}`;
@@ -88,11 +88,11 @@ async function deleteLog(idLog) {
     }
 }
 
-// Fecha o modal de logs
+
 function closeLogModal() {
     document.getElementById('logModal').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
 }
 
-// Botão para exibir logs
+
 document.getElementById('showLogsBtn').addEventListener('click', showLogs);
